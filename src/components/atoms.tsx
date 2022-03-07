@@ -3,7 +3,8 @@ import { atom, selector } from "recoil";
 export interface IToDo{
   text:string,
   id:number,
-  category:Categories
+  category:Categories,
+
 }
 export enum Categories{
   //사실 enum의 값은 숫자다
@@ -32,8 +33,11 @@ export const toDoSelector = selector({
 
 //user
 
+export interface IUserState{
+  createUser:string
+}
 
-export const userState = atom({
-  key:'user',
+export const userState = atom<IUserState[]>({
+  key:'createUser',
   default:[],
 })
