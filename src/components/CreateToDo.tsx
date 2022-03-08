@@ -11,17 +11,20 @@ interface IForm{
 
 function CreateToDo(){
   const{register,handleSubmit,setValue }=useForm<IForm>()
-  const [ToDos,setToDos] = useRecoilState(toDoState);
   const category = useRecoilValue(categoryState);
+  const [ToDos,setToDos] = useRecoilState(toDoState); 
   const onSubmit=(data:IForm)=>{
-    setToDos((oldtodos)=>
-      [{text:data.toDo,id:Date.now(),category},...oldtodos,]
+    setToDos((oldtodos)=>{
+      const updateItem = [{text:data.toDo,id:Date.now(),category},...oldtodos,]
+      window.localStorage.setItem('todo',JSON.stringify(updateItem))
+      return updateItem
+    }
+      
     )   
     setValue("toDo",'');
+
   }
-  useEffect(()=>{
-    window.localStorage.setItem('todo',JSON.stringify(ToDos))
-  },[ToDos])
+  
   return(
     <form onSubmit={handleSubmit(onSubmit)}>
       <input 

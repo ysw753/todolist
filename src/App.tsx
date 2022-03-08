@@ -7,9 +7,10 @@ import {
 } from "react-router-dom";
 import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
 import { createGlobalStyle } from "styled-components";
-import Create from './components/Create';
+
 
 import ToDoList from './components/ToDoList';
+
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
@@ -84,7 +85,6 @@ function App() {
       <RecoilRoot>
         <Routes>
           <Route path="/" element={<ToDoList/>}/>
-          <Route path="/Create" element={<Create/>}/>
         </Routes>
         
       </RecoilRoot>

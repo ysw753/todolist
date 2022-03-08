@@ -13,9 +13,10 @@ export enum Categories{
   'DOING'='DOING', //1
   'DONE'='DONE',  //2
 }
+const storage=localStorage.getItem('todo')
 export const toDoState= atom<IToDo[]>({
   key:'toDo',
-  default:[],
+  default:storage ? JSON.parse(storage):[],
 })
 export const categoryState = atom<Categories>({
   key:'category',
@@ -31,13 +32,3 @@ export const toDoSelector = selector({
   }
 })
 
-//user
-
-export interface IUserState{
-  createUser:string
-}
-
-export const userState = atom<IUserState[]>({
-  key:'createUser',
-  default:[],
-})

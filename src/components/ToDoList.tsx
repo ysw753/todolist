@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {useRecoilState, useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
+import {useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { Categories, categoryState, toDoSelector, toDoState } from "./atoms";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./Todo";
-import User from "./User";
+
 
 
 
@@ -41,14 +42,15 @@ function ToDoList(){
   //useRecoilValue = 값만
   //useRecoilState = 값이랑,변경함수
   const toDos=useRecoilValue(toDoSelector);
+  const setToDos = useSetRecoilState(toDoState);
   const [category, setCategory]=useRecoilState<Categories>(categoryState);
   const onInput=(event:React.FormEvent<HTMLSelectElement>)=>{
     setCategory(event.currentTarget.value as any);
     
   }
+
   return(
     <div>
-      <User/>
       <div>
       <select value={category}  onInput={onInput}>
         <option value={Categories.TO_DO}>TO_DO</option>
