@@ -1,7 +1,21 @@
 import React from "react";
 import { useSetRecoilState } from "recoil";
 import { Categories, IToDo, toDoState } from "./atoms";
+import styled from "styled-components";
+const List = styled.li`
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+`
+const Btn=styled.div`
 
+height:20px;
+display:flex;
+button{
+  border:none;
+  margin:1px;
+}
+`
 function ToDo({text,category,id}:IToDo){
   const setToDos = useSetRecoilState(toDoState);
   
@@ -39,14 +53,17 @@ function ToDo({text,category,id}:IToDo){
   }
 
   return (
-    <li>
-    <span>{text}</span>
-    
-      {category!==Categories.DONE && (<button name={Categories.DONE }/*enum이 사실 숫자라+""*/  onClick={onClick}>DONE</button>) }
+    <List>
+    <div>{text}</div> 
+    <Btn>
+      {category!==Categories.TO_DO && (<button name={Categories.TO_DO }/*enum이 사실 숫자라+""*/ onClick={onClick}>TO_DO</button>)}
       {category!==Categories.DOING && (<button name={Categories.DOING } onClick={onClick}>DOING</button>)}
-      {category!==Categories.TO_DO && (<button name={Categories.TO_DO } onClick={onClick}>TO_DO</button>)}
+      {category!==Categories.DONE && (<button name={Categories.DONE }  onClick={onClick}>DONE</button>) }
+      
+      
       <button onClick={onDelClick}>del</button>
-    </li>
+    </Btn>
+    </List>
 
   )
 }
